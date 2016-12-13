@@ -1,0 +1,30 @@
+<div class="box box-info">
+	<div class="box-header with-border">
+		<h3 class="box-title">Tabela wydatków miesiecznych</h3>
+	</div>
+	<!-- /.box-header -->
+	<div class="box-body">
+
+		<ul class="todo-list ui-sortable">
+			<li *ngFor="let monthlyExpense of monthlyExpenses" class="">
+				<!-- checkbox -->
+				<input type="checkbox" [(ngModel)]="monthlyExpense.incurred" (ngModelChange)="incurredPopertyChange(monthlyExpense)">
+				<!-- todo text -->
+				<small *ngIf="!monthlyExpense.expense.isFixedExpense" class="label bg-yellow"><i class="fa fa-fw fa-shopping-cart"></i></small>
+				<small *ngIf="monthlyExpense.expense.isFixedExpense" class="label bg-aqua"><i class="fa fa-fw fa-home"></i></small>
+
+				<span [ngClass]="{'incurred-class':monthlyExpense.incurred}" class="text" style="font-size: 15px">{{monthlyExpense.expense.desc}} </span>
+				<span class="text" [ngClass]="{'incurred-class':monthlyExpense.incurred}" > {{monthlyExpense.amount}} </span>
+				<span class="text" [ngClass]="{'incurred-class':monthlyExpense.incurred}">zł</span>
+
+
+
+				<!-- General tools such as edit or delete-->
+				<div class="tools">
+					<a class="fa fa-trash-o" href="javascript:void(0)" (click)="removeMonthlyExpense(monthlyExpense)"></a>
+				</div>
+			</li>
+
+		</ul>
+	</div>
+</div>

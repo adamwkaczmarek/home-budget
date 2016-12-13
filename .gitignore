@@ -1,0 +1,29 @@
+### idea
+.idea/
+*.iml
+
+### sts
+.settings
+.classpath
+.project
+
+### maven
+home-budget-common/target/
+home-budget-discovery/target/
+home-budget-auth/target/
+home-budget-api/target/
+home-budget-ui/target/
+home-budget-admin/target/
+home-budget-gateway/target/
+home-budget-config/target/
+
+### node
+npm-debug.log
+npm-debug.log*
+home-budget-ui/etc/
+home-budget-ui/node/
+home-budget-ui/node_modules/
+### coverage
+home-budget-ui/coverage/
+### dist
+home-budget-ui/src/main/resources/static/

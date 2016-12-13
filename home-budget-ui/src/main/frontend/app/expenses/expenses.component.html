@@ -1,0 +1,64 @@
+<div *ngIf="mode=='LIST_ALL'" class="box box-info">
+	<div class="box-header with-border">
+		<h3 class="box-title">Główna tabela wydatków</h3>
+
+		<div class="box-tools pull-right">
+			<a href="javascript:void(0)" (click)="newExpense()" class="btn btn-sm btn-info btn-flat pull-left">Dodaj</a>
+		</div>
+	</div>
+	<!-- /.box-header -->
+	<div class="box-body">
+	<ul class="todo-list ui-sortable">
+						<li *ngFor="let expense of expenses">
+			
+							<!-- todo text -->
+							<small *ngIf="!expense.isFixedExpense" class="label bg-yellow"><i class="fa fa-fw fa-shopping-cart"></i></small>
+							<small *ngIf="expense.isFixedExpense" class="label bg-aqua"><i class="fa fa-fw fa-home"></i></small>
+
+							<span  class="text" style="font-size: 15px">{{expense.desc}} </span>
+							<span class="text" > {{expense.amount}} </span>
+							<span class="text">zł</span>
+
+
+
+							<!-- General tools such as edit or delete-->
+							<div class="tools">
+								<a href="javascript:void(0)" (click)="setMonthlyExpense(expense)" class="glyphicon glyphicon-transfer"></a>
+							<a href="javascript:void(0)" (click)="removeExpense(expense)" class="glyphicon glyphicon-trash"></a>
+							</div>
+						</li>
+
+					</ul>
+	</div>
+	<!-- /.box-body -->
+	<div class="box-footer clearfix">
+	</div>
+	<!-- /.box-footer -->
+</div>
+
+<div *ngIf="mode=='NEW'" class="col-lg-7">
+	<new-expense (onAdd)="refreshList()"></new-expense>
+</div>
+<div *ngIf="mode==EDIT">
+
+</div>
+
+<div class="col-lg-6" *ngIf="mode=='SET_AMOUNT'">
+	<div class="box box-primary">
+		<div class="box-header with-border">
+			<h3 class="box-title">BRAK ZDEFINIOWANEJ KWOTY DOMYŚLNEJ </h3>
+		</div>
+
+		<form role="form" (ngSubmit)="setExpensesAmount()" #setAmountForm="ngForm">
+			<div class="box-body">
+				<div class="form-group">
+					<label for="amount">Kwota</label>
+					<input type="number" class="form-control" id="amount" required [(ngModel)]="choosenExpense.amount" name="amount" step="0.01">
+				</div>
+			</div>
+			<div class="box-footer">
+				<button type="submit" class="btn btn-primary">Zapisz</button>
+			</div>
+		</form>
+	</div>
+</div>

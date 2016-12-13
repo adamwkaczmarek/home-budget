@@ -1,0 +1,17 @@
+<div class="box box-info" style="background-color: #ecf0f5">
+	<div class="box-header with-border" style="background-color: #3c8dbc;color: white;">
+		<span class="box-title" style="font-size: 25px;">{{month_display}}</span><br>
+		<span style="font-size: 15px;"> Saldo : <b>{{balance.balance}} zł </b> </span>
+		<span style="font-size: 15px; margin-left: 20px;"> Wykorzystanie budżetu : <b>{{balance.budgetUsagePercent}}%</b></span>
+    <div class="box-tools pull-right">
+			<i class="fa fa-fw fa-toggle-right" (click)="nextMonth()"style="font-size: 35;"></i>
+		</div>
+	</div>
+	<div class="box-body">
+		<div style="display: block">
+			<canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" 
+			[legend]="true" [colors]="doughnutChartColors"></canvas>
+		</div>
+	</div>
+</div>
+

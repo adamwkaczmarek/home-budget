@@ -1,0 +1,42 @@
+{
+  "project": {
+    "version": "1.0.0-beta.18",
+    "name": "home-budget-ui"
+  },
+  "apps": [
+    {
+      "root": "src/main/frontend",
+      "outDir": "src/main/resources/static",
+      "assets": "assets",
+      "index": "index.html",
+      "main": "app/main.ts",
+      "tsconfig": "tsconfig.json",
+      "mobile": false,
+      "styles": ["./../../../node_modules/bootstrap/dist/css/bootstrap.min.css",
+		 "./../../../node_modules/admin-lte/dist/css/AdminLTE.min.css",
+		 "./../../../node_modules/admin-lte/dist/css/skins/_all-skins.min.css"],
+      "scripts": ["./../../../node_modules/core-js/client/shim.min.js",
+		  "./../../../node_modules/zone.js/dist/zone.js",
+		  "./../../../node_modules/reflect-metadata/Reflect.js",
+		  "./../../../node_modules/systemjs/dist/system.src.js",
+		  "./../../../node_modules/chart.js/dist/Chart.min.js",
+		  "assets/systemjs.config.js"],
+      "environments": {
+        "source": "environments/environment.ts",
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+
+  ],
+  "addons": [],
+  "packages": [],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "defaults": {
+    "prefixInterfaces": false
+  }
+}
