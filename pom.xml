@@ -13,6 +13,7 @@
         <module>home-budget-common</module>
         <module>home-budget-ui</module>
         <module>home-budget-discovery</module>
+        <module>home-budget-config</module>
     </modules>
 
     <properties>
