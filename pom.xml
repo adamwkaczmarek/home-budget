@@ -16,6 +16,7 @@
         <module>home-budget-config</module>
         <module>home-budget-api</module>
         <module>home-budget-gateway</module>
+        <module>home-budget-auth</module>
     </modules>
 
     <properties>
