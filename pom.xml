@@ -15,6 +15,7 @@
         <module>home-budget-discovery</module>
         <module>home-budget-config</module>
         <module>home-budget-api</module>
+        <module>home-budget-gateway</module>
     </modules>
 
     <properties>

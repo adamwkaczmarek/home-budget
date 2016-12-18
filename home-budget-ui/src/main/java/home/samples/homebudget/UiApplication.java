@@ -17,6 +17,8 @@ import java.util.UUID;
 
 @SpringBootApplication
 @EnableCaching
+@EnableDiscoveryClient
+@EnableZuulProxy
 public class UiApplication {
 
 	public static void main(String[] args) {
