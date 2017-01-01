@@ -17,6 +17,9 @@ import { DashboardService } from './dashboard/dashboard.service';
 import { HttpModule }    from '@angular/http';
 import { Configuration } from './app.constants';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import {AuthenticatedGuard} from './shared/guards/authenticated.guard';
+import { AuthService } from './shared/auth/auth.service';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -27,15 +30,16 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     ChartsModule,
     RouterModule.forRoot([
       {
-        path: 'expenses',
-        component: ExpensesComponent
+        path: 'login',
+        component: LoginComponent
       }, {
         path: 'new-expense',
         component: NewExpenseComponent
       },
       {
         path: 'dasboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+         canActivate: [AuthenticatedGuard]
       },
       {
         path: '',
@@ -53,10 +57,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     ExpensesSummaryComponent,
     ExpensesSummaryIsFixedComponent,
     IncomeSummaryComponent,
-    BalanceComponent
+    BalanceComponent,
+    LoginComponent
   ],
   bootstrap: [AppComponent],
-  providers: [ExpenseService,MonthlyExpensesService,DashboardService,Configuration],
+  providers: [ AuthService,,ExpenseService,MonthlyExpensesService,DashboardService,Configuration,AuthenticatedGuard],
 
 })
 export class AppModule { }
