@@ -29,9 +29,9 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    // this.checkTokenExpirationDate();
-    // return this.authenticated;
-    return true;
+     this.checkTokenExpirationDate();
+     return this.authenticated;
+    
   }
 
   public authenticate(username: string, password: string): Promise<string> {
