@@ -1,6 +1,6 @@
 {
-  "/auth": {
-    "target": "http://localhost:8080",
+  "/oauth": {
+    "target": "http://localhost:8083",
     "secure": "false"
   },
   "/api": {

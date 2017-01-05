@@ -8,6 +8,8 @@ import { BalanceComponent } from './balance/balance.component';
 import { IncomeSummaryComponent } from './income-summary/income-summary.component';
 import { MONTHS_DICT } from './../app.constants';
 import { Dict } from './../app.dict';
+import { Router } from '@angular/router';
+import { AuthService } from '../shared/auth/auth.service';
 
 @Component({
     selector: 'my-dashboard',
@@ -45,7 +47,7 @@ export class DashboardComponent {
      private incomeSummaryComponent :IncomeSummaryComponent;
  
 
-    constructor(private service: DashboardService) { };
+    constructor(private service: DashboardService,private authService: AuthService, private router: Router) { };
 
 
     ngOnInit(): void {
@@ -94,5 +96,10 @@ export class DashboardComponent {
         console.log("************** DashboardComponent#nextMonth ",this.year, this.month,"*************");
         this.refreshAllViews();
     }
+
+    logout():void{
+    this.authService.logout();
+    this.router.navigate(['login']);
+ }
 
 }
