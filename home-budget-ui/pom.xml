@@ -8,7 +8,7 @@
     <parent>
         <groupId>home-samples</groupId>
         <artifactId>home-budget</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
 
     <artifactId>home-budget-ui</artifactId>
