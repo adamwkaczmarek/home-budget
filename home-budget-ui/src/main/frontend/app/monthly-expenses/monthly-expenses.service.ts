@@ -3,6 +3,8 @@ import { MonthlyExpense } from './monthly-expense';
 import { NewMonthlyExpense } from './new-monthly-expense';
 import { Headers, Http } from '@angular/http';
 import { Configuration } from './../app.constants';
+import {AuthService} from '../shared/auth/auth.service';
+
 import 'rxjs/add/operator/toPromise';
 
 
@@ -18,38 +20,30 @@ export class MonthlyExpensesService {
 
     private headers: Headers;
 
-    constructor(private http: Http, private _configuration: Configuration) {
-        this.findUrl = _configuration.ServerWithApiUrl + 'home-samples/monthly-expense/in-month/';
-        this.addActionUrl = _configuration.ServerWithApiUrl + 'home-samples/monthly-expense/add/';
-        this.sumInMonthUrl = _configuration.ServerWithApiUrl + 'home-samples/monthly-expense/in-month';
-        this.removeActionUrl = _configuration.ServerWithApiUrl + "home-samples/monthly-expense/remove/";
-        this.setAsIncurredUrl = _configuration.ServerWithApiUrl + "home-samples/monthly-expense/set-as-incurred/";
-        this.setAsNotIncurredUrl = _configuration.ServerWithApiUrl + "home-samples/monthly-expense/set-as-not-incurred";
-
-        this.headers = new Headers();
-        this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Accept', 'application/json');
+    constructor(private http: Http, private _configuration: Configuration,private authService: AuthService) {
+        this.findUrl = '/api/monthly-expense/in-month/';
+        this.addActionUrl = '/api/monthly-expense/add/';
+        this.sumInMonthUrl ='/api/monthly-expense/in-month';
+        this.removeActionUrl = "/api/monthly-expense/remove/";
+        this.setAsIncurredUrl = "/api/monthly-expense/set-as-incurred/";
+        this.setAsNotIncurredUrl = "/api/monthly-expense/set-as-not-incurred";
 
     };
 
     setAsIncurred(id: number): Promise<any> {
-        return this.http.put(this.setAsIncurredUrl + "/" + id, {
-            headers: this.headers
-        }).toPromise()
+        return this.http.put(this.setAsIncurredUrl + "/" + id, {headers: this.authService.getAuthorizationHeaders()}).toPromise()
             .catch(this.handleError)
     }
 
 
     setAsNotIncurred(id: number): Promise<any> {
-        return this.http.put(this.setAsNotIncurredUrl + "/" + id, {
-            headers: this.headers
-        }).toPromise()
+        return this.http.put(this.setAsNotIncurredUrl + "/" + id, {headers: this.authService.getAuthorizationHeaders()}).toPromise()
             .catch(this.handleError)
     }
 
 
     getMonthlyExpenses(month: string, year: number): Promise<MonthlyExpense[]> {
-        return this.http.get(this.findUrl + '/' + month + '/' + year)
+        return this.http.get(this.findUrl + '/' + month + '/' + year,{headers: this.authService.getAuthorizationHeaders()})
             .toPromise()
             .then(response => response.json() as MonthlyExpense[])
             .catch(this.handleError)
@@ -57,7 +51,7 @@ export class MonthlyExpensesService {
 
     getMonthlyExpensesSum(month: string, year: number): Promise<Number> {
 
-        return this.http.get(this.sumInMonthUrl + '/' + month + '/' + year + '/sum')
+        return this.http.get(this.sumInMonthUrl + '/' + month + '/' + year + '/sum',{headers: this.authService.getAuthorizationHeaders()})
             .toPromise()
             .then(response => Number(response.text()))
             .catch(this.handleError);
@@ -65,7 +59,7 @@ export class MonthlyExpensesService {
     }
     getMonthlyFixedExpensesSum(month: string, year: number): Promise<Number> {
 
-        return this.http.get(this.sumInMonthUrl + '/' + month + '/' + year + '/sum-fixed')
+        return this.http.get(this.sumInMonthUrl + '/' + month + '/' + year + '/sum-fixed',{headers: this.authService.getAuthorizationHeaders()})
             .toPromise()
             .then(response => Number(response.text()))
             .catch(this.handleError);
@@ -73,7 +67,7 @@ export class MonthlyExpensesService {
     }
     getMonthlySingleExpensesSum(month: string, year: number): Promise<Number> {
 
-        return this.http.get(this.sumInMonthUrl + '/' + month + '/' + year + '/sum-single')
+        return this.http.get(this.sumInMonthUrl + '/' + month + '/' + year + '/sum-single',{headers: this.authService.getAuthorizationHeaders()})
             .toPromise()
             .then(response => Number(response.text()))
             .catch(this.handleError);
@@ -83,17 +77,13 @@ export class MonthlyExpensesService {
 
     addExpenses(newMonthlyExpesnse: NewMonthlyExpense): Promise<MonthlyExpense> {
         console.log(newMonthlyExpesnse);
-        return this.http.post(this.addActionUrl, newMonthlyExpesnse, {
-            headers: this.headers
-        }).toPromise()
+        return this.http.post(this.addActionUrl, newMonthlyExpesnse, {headers: this.authService.getAuthorizationHeaders()}).toPromise()
             .then(response => response.json() as MonthlyExpense)
             .catch(this.handleError)
     }
 
     removeExpense(id: number): Promise<any> {
-        return this.http.delete(this.removeActionUrl + "/" + id, {
-            headers: this.headers
-        }).toPromise()
+        return this.http.delete(this.removeActionUrl + "/" + id, {headers: this.authService.getAuthorizationHeaders()}).toPromise()
             .catch(this.handleError)
     }
 
